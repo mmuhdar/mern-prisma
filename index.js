@@ -1,13 +1,16 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+// import ProductsRouter from './routes/ProductRoute';
+const router = require('./routes')
 dotenv.config();
 
 const app = express();
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(router);
 
-app.listen(process.env.APP_PORT, () => {
-  console.log(`Server has run on port ${process.env.APP_PORT}`);
-});
+module.exports = app;
